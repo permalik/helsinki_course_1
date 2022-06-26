@@ -1,15 +1,30 @@
 import { useState } from 'react';
 
+const Button = (props) => {
+  return <button onClick={props.toggle}>{props.name}</button>;
+};
+
+const StatisticLine = (props) => {
+  return (
+    <p>
+      {props.text}: {props.state}
+    </p>
+  );
+};
+
 const Statistics = (props) => {
   return (
     <div>
       <h2>Statistics</h2>
-      <p>Good: {props.good}</p>
-      <p>Neutral: {props.neutral}</p>
-      <p>Bad: {props.bad}</p>
-      <p>All: {props.all}</p>
-      <p>Average: {props.average}</p>
-      <p>Positive: {props.positive ? `${props.positive}%` : 'unknown'}</p>
+      <StatisticLine text={'Good'} state={props.p1} />
+      <StatisticLine text={'Neutral'} state={props.p2} />
+      <StatisticLine text={'Bad'} state={props.p3} />
+      <StatisticLine text={'All'} state={props.p4} />
+      <StatisticLine text={'Average'} state={props.p5} />
+      <StatisticLine
+        text={'Positive'}
+        state={props.p6 ? `${props.p6}%` : 'unknown'}
+      />
     </div>
   );
 };
@@ -34,34 +49,32 @@ const App = () => {
     <div>
       <h2>Give Feedback</h2>
       <menu>
-        <button
-          onClick={() => {
+        <Button
+          name={'good'}
+          toggle={() => {
             incrementParam(good, setGood);
           }}
-        >
-          good
-        </button>
-        <button
-          onClick={() => {
+        />
+        <Button
+          name={'neutral'}
+          toggle={() => {
             incrementParam(neutral, setNeutral);
           }}
-        >
-          neutral
-        </button>
-        <button
-          onClick={() => {
+        />
+        <Button
+          name={'bad'}
+          toggle={() => {
             incrementParam(bad, setBad);
           }}
-        >
-          bad
-        </button>
+        />
         {all > 0 ? (
           <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            average={average}
-            positive={positive}
+            p1={good}
+            p2={neutral}
+            p3={bad}
+            p4={all}
+            p5={average}
+            p6={positive}
           />
         ) : (
           <div>'No feedback given'</div>
