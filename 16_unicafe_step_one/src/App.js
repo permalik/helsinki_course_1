@@ -55,13 +55,17 @@ const App = () => {
         >
           bad
         </button>
-        <Statistics
-          good={good}
-          neutral={neutral}
-          bad={bad}
-          average={average}
-          positive={positive}
-        />
+        {all > 0 ? (
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            average={average}
+            positive={positive}
+          />
+        ) : (
+          <div>'No feedback given'</div>
+        )}
       </menu>
     </div>
   );
